@@ -3,28 +3,26 @@ exports.up = function(knex) {
   // 'clients' table
   return (
     knex.schema
-      .createTable(
-        'users',
-        (tbl = () => {
-          tbl.increments();
+      .createTable('users', tbl => {
+        tbl.increments();
 
-          tbl
-            .string('username', 255)
-            .notNullable()
-            .unique();
+        tbl
+          .string('username', 255)
+          .notNullable()
+          .unique();
 
-          tbl
-            .string('email', 255)
-            .notNullable()
-            .unique();
+        tbl
+          .string('email', 255)
+          .notNullable()
+          .unique();
 
-          tbl.string('password', 255).notNullable();
+        tbl.string('password', 255).notNullable();
 
-          tbl.string('role').notNullable();
+        tbl.string('role').notNullable();
 
-          tbl.timestamps(true, true);
-        })
-      )
+        tbl.timestamps(true, true);
+      }) //end of 'users' table
+
       // 'classes' table
       .createTable('classes', tbl => {
         tbl.increments();
@@ -40,20 +38,12 @@ exports.up = function(knex) {
         tbl.date('class_date');
 
         tbl.datetime('class_timezone');
-      })
-      //attendees table
+      }) // end of 'classes' table
+
       .createTable('attendees', tbl => {
         tbl.increments();
-
-        tbl.string('attendee_name', 255);
-        tbl.i;
-      })
-
-      // 'client_class' table
-      .createTable('users_classes', tbl => {
-        tbl.increments();
         tbl
-          .integer('users_id')
+          .integer('user_id')
           .references('id')
           .inTable('users')
           .unsigned()
@@ -61,22 +51,21 @@ exports.up = function(knex) {
           .onUpdate('CASCADE')
           .onDelete('CASCADE');
         tbl
-          .integer('classes_id')
+          .integer('class_id')
           .references('id')
           .inTable('classes')
           .unsigned()
           .notNullable()
           .onUpdate('CASCADE')
           .onDelete('CASCADE');
-      })
+      }) //end of 'attendees' table
   );
 };
 
 exports.down = function(knex) {
   //make sure to reverser order from above
   return knex.schema
-    .dropTableIfExists('client_class')
-    .dropTableIfExists('attendees')
+    .dropTableIfExists('users')
     .dropTableIfExists('classes')
-    .dropTableIfExists('clients');
+    .dropTableIfExists('attendees');
 };
