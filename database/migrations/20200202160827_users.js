@@ -1,6 +1,6 @@
 exports.up = function(knex) {
   // for seeds, make sure this order matches
-  // 'clients' table
+  // 'users' table
   return (
     knex.schema
       .createTable('users', tbl => {
@@ -65,7 +65,7 @@ exports.up = function(knex) {
 exports.down = function(knex) {
   //make sure to reverser order from above
   return knex.schema
-    .dropTableIfExists('users')
+    .dropTableIfExists('attendees')
     .dropTableIfExists('classes')
-    .dropTableIfExists('attendees');
+    .dropTableIfExists('users');
 };
