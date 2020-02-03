@@ -5,7 +5,9 @@ module.exports = {
   getUsers,
   getUserById,
   findBy,
-  addUser
+  addUser,
+  updateUser,
+  deleteUser
 };
 
 //getUsers --> get all 'users'
@@ -36,3 +38,15 @@ function addUser(user) {
       return getUserById(ids[0]);
     });
 }
+
+// updates a user 
+
+function updateUser(id, changes){
+  return db('users').where({id}).update(changes)
+}
+
+
+function deleteUser(id){
+  return db('users').where({id}).del()
+}
+

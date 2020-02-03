@@ -35,4 +35,48 @@ router.get('/:id', (req, res) => {
     });
 });
 
+
+//PUT Update Class 
+
+router.put('/:id', (req, res) => {
+  
+  Classes.updateClass(req.params.id, req.body)
+    .then(item => {
+      res.status(201).json(item)
+    }) 
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({message: "something went wrong in the server"})
+    })
+})
+
+
+// DELET a Classs
+
+router.delete('/:id', (req, res) => {
+  Classes.deleteClass(req.params.id)
+  .then(result => {
+    res.status(201).json(4)
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).json({message: "Something went wrong in the server"})
+  })
+})
+
+
+
+// GET CLASSS BY USER ID
+
+router.get('/:id/user_classes', (req, res) => {
+  Classes.getClassByUserId(req.params.id)
+    .then( result => {
+      res.status(201).json(result)
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({message: "sorry something is wrong with the server"})
+    })
+})
+
 module.exports = router;
