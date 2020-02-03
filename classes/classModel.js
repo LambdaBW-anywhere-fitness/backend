@@ -3,6 +3,7 @@ const db = require('../database/dbConfig');
 module.exports = {
   getClasses,
   getClassById,
+  addClass,
   updateClass,
   deleteClass,
   getClassByUserId
@@ -20,25 +21,36 @@ function getClassById(id) {
     .first();
 }
 
+//create new class
+function addClass(activity) {
+  return db('classes')
+    .insert(activity, 'id')
+    .then(ids => {
+      console.log(ids);
+      return getClassById(ids[0]);
+    });
+}
 
 // update class
 
-function updateClass(id, changes){
-  return db('classes').where({id}).update(changes)
+function updateClass(id, changes) {
+  return db('classes')
+    .where({ id })
+    .update(changes);
 }
-
 
 // delete a class
 
-function deleteClass(id){
-  return db('classes').where({id}).del()
+function deleteClass(id) {
+  return db('classes')
+    .where({ id })
+    .del();
 }
 
-function getClassByUserId(userid){
+function getClassByUserId(userid) {
   return db('classes as c')
-  .join('attendees as a', 'c.id', 'a.class_id')
-  .join('users as u', 'u.id', 'a.user_id')
-  .select('c.class_name', 'u.username', 'c.class_city', 'c.start_time', 'class_duration', 'u.id as user_id', 'class_date')
-  .where('u.id', userid)
-  
+    .join('attendees as a', 'c.id', 'a.class_id')
+    .join('users as u', 'u.id', 'a.user_id')
+    .select('c.class_name', 'u.username', 'c.class_city', 'c.start_time', 'class_duration', 'u.id as user_id', 'class_date')
+    .where('u.id', userid);
 }
