@@ -31,14 +31,15 @@ router.post('/login', (req, res) => {
   //add here
   const { username, password, role } = req.body;
 
-  Users.findBy()
+  Users.findBy(username)
+    .first()
     .then(user => {
       console.log('inside user findBy', user);
       if (user && bcrypt.compareSync(password, user.password)) {
         //create the token
-        const token = signToken(user); //invoke the function and pass in the 'user'
+        signToken(user); //invoke the function and pass in the 'user'
 
-        res.status(200).json({ message: `Welcome ${user.username}. Thanks for being an ${user.role} today!` });
+        res.status(200).json({ message: `Welcome ${user.username}. Thanks for being an ${user.role} today! ` });
       } else {
         res.status(401).json({ message: 'Sorry, Invalid credentials' });
       }
@@ -50,7 +51,7 @@ router.post('/login', (req, res) => {
 });
 
 //signToken function here
-function signToken() {
+function signToken(user) {
   const payload = {
     //add any data we want to store in token payload
     user
