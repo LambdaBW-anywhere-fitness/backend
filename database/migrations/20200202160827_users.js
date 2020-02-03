@@ -37,6 +37,8 @@ exports.up = function(knex) {
 
         tbl.date('class_date');
 
+        tbl.string('start_time');
+
         tbl.datetime('class_timezone');
       }) // end of 'classes' table
 
