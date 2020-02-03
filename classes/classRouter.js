@@ -36,7 +36,7 @@ router.get('/:id', (req, res) => {
 });
 
 // POST --> add a new class
-router.post('/create_class', (req, res) => {
+router.post('/', (req, res) => {
   const newClass = req.body;
 
   Classes.addClass(newClass)
