@@ -35,48 +35,62 @@ router.get('/:id', (req, res) => {
     });
 });
 
+// POST --> add a new class
+router.post('/create_class', (req, res) => {
+  const newClass = req.body;
 
-//PUT Update Class 
+  Classes.addClass(newClass)
+    .then(activity => {
+      console.log('inside addClass activity', activity);
+      if (activity) {
+        res.status(200).json(activity);
+      } else {
+        res.status(401).json({ message: 'Sorry, you were unable to create a new class or activity' });
+      }
+    })
+    .catch(error => {
+      console.log('inside addClass error', error);
+      res.status(500).json({ message: 'Sorry, no new class create on the server', error });
+    });
+});
+
+//PUT Update Class
 
 router.put('/:id', (req, res) => {
-  
   Classes.updateClass(req.params.id, req.body)
     .then(item => {
-      res.status(201).json(item)
-    }) 
-    .catch(err => {
-      console.log(err)
-      res.status(500).json({message: "something went wrong in the server"})
+      res.status(201).json(item);
     })
-})
-
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ message: 'something went wrong in the server' });
+    });
+});
 
 // DELET a Classs
 
 router.delete('/:id', (req, res) => {
   Classes.deleteClass(req.params.id)
-  .then(result => {
-    res.status(201).json(4)
-  })
-  .catch(err => {
-    console.log(err)
-    res.status(500).json({message: "Something went wrong in the server"})
-  })
-})
-
-
+    .then(result => {
+      res.status(201).json(4);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ message: 'Something went wrong in the server' });
+    });
+});
 
 // GET CLASSS BY USER ID
 
 router.get('/:id/user_classes', (req, res) => {
   Classes.getClassByUserId(req.params.id)
-    .then( result => {
-      res.status(201).json(result)
+    .then(result => {
+      res.status(201).json(result);
     })
     .catch(err => {
-      console.log(err)
-      res.status(500).json({message: "sorry something is wrong with the server"})
-    })
-})
+      console.log(err);
+      res.status(500).json({ message: 'sorry something is wrong with the server' });
+    });
+});
 
 module.exports = router;
