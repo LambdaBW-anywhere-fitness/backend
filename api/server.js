@@ -3,7 +3,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 
 // const authRouter = require('../auth/authRouter');
-// const classRouter = require('../classes/classRouter');
+const classRouter = require('../classes/classRouter');
 const userRouter = require('../users/userRouter');
 
 const server = express();
@@ -19,7 +19,7 @@ server.get('/', (req, res) => {
 
 //routes go below
 // server.use('/api/auth', authRouter);
-// server.use('/api/classes', classRouter);
+server.use('/api/classes', classRouter);
 server.use('/api/users', userRouter);
 
 module.exports = server;

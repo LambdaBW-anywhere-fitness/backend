@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
     });
 });
 
-//getUserById --> returns a list of a single 'user' by 'id' ---> from endpoint ---> /api/user
+//getUserById --> returns a list of a single 'user' by 'id' ---> from endpoint ---> /api/user/:id
 router.get('/:id', (req, res) => {
   //add logic here
   const userId = req.params.id;
