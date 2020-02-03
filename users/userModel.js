@@ -4,6 +4,7 @@ module.exports = {
   //export helper functions to 'authRouter'
   getUsers,
   getUserById,
+  findBy,
   addUser
 };
 
