@@ -27,7 +27,7 @@ router.get('/:id', (req, res) => {
     .then(user => {
       console.log('inside getUserById', user);
       if (user) {
-        res.status(200).json({ message: 'Congrats, user found' });
+        res.status(200).json(user);
       } else {
         res.status(401).json({ message: 'Sorry, user with that id not found' });
       }
