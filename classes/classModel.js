@@ -6,7 +6,8 @@ module.exports = {
   addClass,
   updateClass,
   deleteClass,
-  getClassByUserId
+  getClassByUserId,
+  addClassByUserId
 };
 
 //getClasses --> get a list of all 'classes' --> from endpoint --> /api/classes
@@ -53,4 +54,10 @@ function getClassByUserId(userid) {
     .join('users as u', 'u.id', 'a.user_id')
     .select('c.class_name', 'u.username', 'c.class_city', 'c.start_time', 'class_duration', 'u.id as user_id', 'class_date')
     .where('u.id', userid);
+}
+
+function addClassByUserId(userid, classid){
+   return db('attendees').insert(userid)
+   .where('attendess.user_id').insert(classid)
+   .where('attendees.class_id').select('attendess.class_id')
 }
