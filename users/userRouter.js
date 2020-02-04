@@ -1,11 +1,11 @@
 const express = require('express');
 const Users = require('../users/userModel');
-
+const restricted = require('../auth/restricted-middleware');
 const router = express.Router();
 
 //getUsers --> returns a list of all 'users' --> from endpoint --> /api/users
 
-router.get('/', (req, res) => {
+router.get('/', restricted, (req, res) => {
   //add logic here
   Users.getUsers()
     .then(users => {
