@@ -9,13 +9,23 @@ beforeEach(() => {
     .then(() => db.seed.run());
 });
 
+// describe('GET / all users', () => {
+//   it('responds with status code 200 and return list of users', () => {
+//     return request(server)
+//       .get('/api/users')
+//       .then(res => {
+//         console.log('inside testing line 17', res);
+//         expect(res.status).toBe(200);
+//       });
+//   });
+// });
+
 describe('GET / all users', () => {
   it('responds with status code 200 and return list of users', () => {
     return request(server)
       .get('/api/users')
-      .then(res => {
-        expect(res.status).toBe(200);
-      });
+      .expect('Content-Type', /json/)
+      .expect(200);
   });
 });
 
@@ -28,3 +38,13 @@ describe('GET / all users', () => {
       });
   });
 });
+
+// .expect(function(res) {
+//     // res.body.length > 0;
+//     res.body[0] = {
+//       id: 1,
+//       email: 'todd@test.com',
+//       password: 'toddmurphy',
+//       role: 'instructor'
+//     };
+//   });

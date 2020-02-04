@@ -38,30 +38,29 @@ router.get('/:id', (req, res) => {
     });
 });
 
-// PUT(Update user) 
+// PUT(Update user)
 
- router.put('/:id', (req, res) => {
-   Users.updateUser(req.params.id, req.body)
-   .then( user => {
-    res.status(201).json(user)
-   })
-   .catch(err => {
-     res.status(500).json({error:" something went wrong in the server"})
-   })
- })
+router.put('/:id', (req, res) => {
+  Users.updateUser(req.params.id, req.body)
+    .then(user => {
+      res.status(201).json(user);
+    })
+    .catch(err => {
+      res.status(500).json({ error: ' something went wrong in the server' });
+    });
+});
 
- //DELETE User 
+//DELETE User
 
-
- router.delete('/:id', (req, res) => {
-   Users.deleteUser(req.params.id)
-   .then(user => {
-     res.status(200).json(4)
-   })
-   .catch(err => {
-     console.log(err)
-     res.status(500).json({message: "error with the server"})
-   })
- })
+router.delete('/:id', (req, res) => {
+  Users.deleteUser(req.params.id)
+    .then(user => {
+      res.status(200).json(4);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ message: 'error with the server' });
+    });
+});
 
 module.exports = router;
