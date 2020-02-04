@@ -1,13 +1,13 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
+const middleware = require('../middleware/middle-ware')
 const Users = require('../users/userModel');
 
 const router = express.Router();
 
 //register (POST) --> for endpoint beginning --> endpoint with /api/auth
-router.post('/register', (req, res) => {
+router.post('/register', middleware.verifyRegister, (req, res) => {
   //add here
   const newUser = req.body;
 
@@ -27,7 +27,7 @@ router.post('/register', (req, res) => {
 });
 
 //login (POST) --> for endpoint beginning --> endpoing with /api/auth
-router.post('/login', (req, res) => {
+router.post('/login', middleware.verifyLogin, (req, res) => {
   //add here
   const { username, password, role } = req.body;
 
@@ -39,7 +39,7 @@ router.post('/login', (req, res) => {
         //create the token
         const token = signToken(user); //invoke the function and pass in the 'user'
 
-        res.status(200).json({ message: `Welcome ${user.username}. Thanks for being an ${user.role} today! `, token: token });
+        res.status(200).json({ message: `Welcome ${user.username}. Thanks for being an ${user.role} today! `, username: user.username, email: user.email, role: user.role, token: token });
       } else {
         res.status(401).json({ message: 'Sorry, Invalid credentials' });
       }
