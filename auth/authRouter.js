@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const middleware = require('../middleware/middle-ware')
+const middleware = require('../middleware/middle-ware');
 const Users = require('../users/userModel');
 
 const router = express.Router();
@@ -39,7 +39,11 @@ router.post('/login', middleware.verifyLogin, (req, res) => {
         //create the token
         const token = signToken(user); //invoke the function and pass in the 'user'
 
+
+     
+
         res.status(200).json( { user: { id: user.id , message: `Welcome ${user.username}. Thanks for being an ${user.role} today! `,  username: user.username, email: user.email, role: user.role, token: token } });
+
       } else {
         res.status(401).json({ message: 'Sorry, Invalid credentials' });
       }
