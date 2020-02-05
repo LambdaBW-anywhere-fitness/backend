@@ -10,7 +10,7 @@ beforeEach(() => {
 });
 
 describe('GET / all users', () => {
-  it('responds with status code 200 and return list of users', () => {
+  it('responds with status code 401 to make sure middleware works', () => {
     return request(server)
       .get('/api/users')
       .expect('Content-Type', /json/)
