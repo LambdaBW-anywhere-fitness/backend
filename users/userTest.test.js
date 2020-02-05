@@ -26,3 +26,32 @@ describe('GET / single user', () => {
       .expect(200);
   });
 });
+
+//update a user test
+describe('PUT /users/1', function() {
+  it('updates a single user', function() {
+    request(server)
+      .put('/api/users/1')
+      .send({
+        username: 'superman',
+        email: 'superman@test.com',
+        password: 'superman',
+        role: 'instructor'
+      })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .then(res => {
+        expect(res.status).toBe(201);
+      });
+  });
+});
+
+//delete a user test
+describe('DELETE/ single user', () => {
+  it('responds with status code 200 and single user was deleted', () => {
+    return request(server)
+      .delete('/api/users/1')
+      .expect('Content-Type', /json/)
+      .expect(200);
+  });
+});
