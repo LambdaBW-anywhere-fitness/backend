@@ -8,7 +8,10 @@
 
 # API Documentation
 
-#### 1️⃣ Backend delpoyed at [🚫name service here](🚫add URL here) <br>
+# POSTMAN API DOCUMENTATION: https://documenter.getpostman.com/view/2508880/SWTEbbhy?version=latest
+
+#### 1️⃣ Backend delpoyed at [https://anywhere-fitness-backend.herokuapp.com](🚫add URL here) <br>
+#### Refer to POSTMAN documentation for api routes
 
 ## 1️⃣ Getting started
 
