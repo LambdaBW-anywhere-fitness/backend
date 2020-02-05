@@ -5,7 +5,7 @@ const server = require('../api/server');
 describe('POST / register', function() {
   it('registers a user and returns with json', function() {
     request(server)
-      .post('/api/register')
+      .post('/api/auth/register')
       .send({
         username: 'superman',
         email: 'superman@test.com',
@@ -23,7 +23,7 @@ describe('POST / register', function() {
 describe('POST /login', function() {
   it('sends login and returns with json', function() {
     request(server)
-      .post('/api/login')
+      .post('/api/auth/login')
       .send({ username: 'ironman', password: 'ironman' })
       .set('Accept', 'application/json')
       .then(res => {
