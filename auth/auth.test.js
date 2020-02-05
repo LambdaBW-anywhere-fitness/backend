@@ -1,17 +1,6 @@
 const request = require('supertest');
-const server = require('../api/server');
 
-describe('POST /login', function() {
-  it('sends login and returns with json', function() {
-    request(server)
-      .post('/api/login')
-      .send({ username: 'ironman', password: 'ironman' })
-      .set('Accept', 'application/json')
-      .then(res => {
-        expect(res.status).toBe(200);
-      });
-  });
-});
+const server = require('../api/server');
 
 describe('POST / register', function() {
   it('registers a user and returns with json', function() {
@@ -25,6 +14,18 @@ describe('POST / register', function() {
       })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
+      .then(res => {
+        expect(res.status).toBe(200);
+      });
+  });
+});
+
+describe('POST /login', function() {
+  it('sends login and returns with json', function() {
+    request(server)
+      .post('/api/login')
+      .send({ username: 'ironman', password: 'ironman' })
+      .set('Accept', 'application/json')
       .then(res => {
         expect(res.status).toBe(200);
       });
