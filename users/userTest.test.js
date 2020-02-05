@@ -13,28 +13,16 @@ describe('GET / all users', () => {
   it('responds with status code 200 and return list of users', () => {
     return request(server)
       .get('/api/users')
-      .auth('username', 'password')
-      .then(res => {
-        expect(res.status).toBe(200);
-      });
-  });
-});
-
-describe('GET / all users', () => {
-  it('responds with status code 200 and return list of users', () => {
-    return request(server)
-      .get('/api/users')
       .expect('Content-Type', /json/)
       .expect(200);
   });
 });
 
-describe('GET / all users', () => {
+describe('GET / single user', () => {
   it('responds with status code 200 and single user', () => {
     return request(server)
       .get('/api/users/1')
-      .then(res => {
-        expect(res.status).toBe(200);
-      });
+      .expect('Content-Type', /json/)
+      .expect(200);
   });
 });
