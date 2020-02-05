@@ -25,7 +25,7 @@ router.get('/:id', (req, res) => {
 
   Users.getUserById(userId)
     .then(user => {
-      console.log('inside getUserById', user);
+      // console.log('inside getUserById', user);
       if (user) {
         res.status(200).json(user);
       } else {
