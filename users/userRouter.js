@@ -5,7 +5,7 @@ const router = express.Router();
 
 //getUsers --> returns a list of all 'users' --> from endpoint --> /api/users
 
-router.get('/', restricted, (req, res) => {
+router.get('/',  (req, res) => {
   //add logic here
   Users.getUsers()
     .then(users => {

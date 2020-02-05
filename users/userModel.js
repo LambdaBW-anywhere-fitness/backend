@@ -8,7 +8,7 @@ module.exports = {
   addUser,
   updateUser,
   deleteUser,
-  findById
+ 
 };
 
 //getUsers --> get all 'users'

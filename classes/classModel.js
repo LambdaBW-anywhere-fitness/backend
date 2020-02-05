@@ -12,7 +12,7 @@ module.exports = {
 
 //getClasses --> get a list of all 'classes' --> from endpoint --> /api/classes
 function getClasses() {
-  return db('classes');
+  return db('classes').orderBy('classes.id');
 }
 
 //getClassById --> gets a list a single 'class' by 'id' --> from endpoint --> /api/classes/:id
@@ -37,7 +37,8 @@ function addClass(activity) {
 function updateClass(id, changes) {
   return db('classes')
     .where({ id })
-    .update(changes);
+    .update(changes)
+    .then(() => getClassById(id))
 }
 
 // delete a class

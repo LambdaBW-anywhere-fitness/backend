@@ -2,7 +2,7 @@ const request = require('supertest');
 
 const server = require('../api/server');
 
-describe('POST / register', function() {
+describe.skip('POST / register', function() {
   it('registers a user and returns with json', function() {
     request(server)
       .post('/api/register')
@@ -20,7 +20,7 @@ describe('POST / register', function() {
   });
 });
 
-describe('POST /login', function() {
+describe.skip('POST /login', function() {
   it('sends login and returns with json', function() {
     request(server)
       .post('/api/login')

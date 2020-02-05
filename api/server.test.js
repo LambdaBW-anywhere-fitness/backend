@@ -3,7 +3,7 @@ const request = require('supertest');
 const server = require('./server');
 
 //GET test --> test server is working
-describe('server', function() {
+describe.skip('server', function() {
   it('describes the test working', function() {
     expect(true).toBe(true);
   });
