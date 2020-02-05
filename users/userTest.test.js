@@ -1,5 +1,5 @@
 const request = require('supertest');
-const db = require('../database/dbConfig');
+// const db = require('../database/dbConfig');
 const server = require('../api/server');
 
 // beforeEach(() => {
@@ -9,16 +9,16 @@ const server = require('../api/server');
 //     .then(() => db.seed.run());
 // });
 
-// describe('GET / all users', () => {
-//   it('responds with status code 200 and return list of users', () => {
-//     return request(server)
-//       .get('/api/users')
-//       .then(res => {
-//         console.log('inside testing line 17', res);
-//         expect(res.status).toBe(200);
-//       });
-//   });
-// });
+describe('GET / all users', () => {
+  it('responds with status code 200 and return list of users', () => {
+    return request(server)
+      .get('/api/users')
+      .auth('username', 'password')
+      .then(res => {
+        expect(res.status).toBe(200);
+      });
+  });
+});
 
 describe('GET / all users', () => {
   it('responds with status code 200 and return list of users', () => {
@@ -38,13 +38,3 @@ describe('GET / all users', () => {
       });
   });
 });
-
-// .expect(function(res) {
-//     // res.body.length > 0;
-//     res.body[0] = {
-//       id: 1,
-//       email: 'todd@test.com',
-//       password: 'toddmurphy',
-//       role: 'instructor'
-//     };
-//   });
