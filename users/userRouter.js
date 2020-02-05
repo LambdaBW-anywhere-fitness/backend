@@ -43,7 +43,8 @@ router.get('/:id', (req, res) => {
 router.put('/:id', (req, res) => {
   Users.updateUser(req.params.id, req.body)
     .then(user => {
-      res.status(201).json(user);
+      console.log(req.body);
+      res.status(201).json(req.body);
     })
     .catch(err => {
       res.status(500).json({ error: ' something went wrong in the server' });
