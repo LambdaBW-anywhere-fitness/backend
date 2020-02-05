@@ -40,19 +40,22 @@ function addUser(user) {
     });
 }
 
-// updates a user 
+// updates a user
 
-function updateUser(id, changes){
-  return db('users').where({id}).update(changes)
-  .then(id => findById(id))
+
+function updateUser(id, changes) {
+  return db('users')
+    .where({ id })
+    .update(changes)
+    .then(username => {
+      console.log(username);
+      findBy(username);
+    });
+
 }
 
-function findById(id){
-  return db('users').where({id}).select('*').first()
+function deleteUser(id) {
+  return db('users')
+    .where({ id })
+    .del();
 }
-
-
-function deleteUser(id){
-  return db('users').where({id}).del()
-}
-
