@@ -7,7 +7,8 @@ module.exports = {
   findBy,
   addUser,
   updateUser,
-  deleteUser
+  deleteUser,
+  findById
 };
 
 //getUsers --> get all 'users'
@@ -43,6 +44,11 @@ function addUser(user) {
 
 function updateUser(id, changes){
   return db('users').where({id}).update(changes)
+  .then(id => findById(id))
+}
+
+function findById(id){
+  return db('users').where({id}).select('*').first()
 }
 
 
