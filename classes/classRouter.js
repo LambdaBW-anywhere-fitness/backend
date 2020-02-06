@@ -72,7 +72,7 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
   Classes.deleteClass(req.params.id)
     .then(result => {
-      res.status(201).json(4);
+      res.status(201).json(`class id ${req.params.id} was deleted`);
     })
     .catch(err => {
       console.log(err);
@@ -93,16 +93,14 @@ router.get('/:id/user_classes', (req, res) => {
     });
 });
 
-
-
 router.post('/user_classes', (req, res) => {
-   Classes.addClassByUserId(req.params.id, req.body)
-   .then(result => {
-     res.status(201).json({message: "success"})
-   })
-   .catch(err => {
-     console.log(err)
-     res.status(500).json({message: 'sorry something is wrong with the server'})
-   })
-}) 
+  Classes.addClassByUserId(req.params.id, req.body)
+    .then(result => {
+      res.status(201).json({ message: 'success' });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ message: 'sorry something is wrong with the server' });
+    });
+});
 module.exports = router;
