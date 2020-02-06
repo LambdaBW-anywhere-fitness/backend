@@ -47,11 +47,7 @@ function updateUser(id, changes) {
   return db('users')
     .where({ id })
     .update(changes)
-    .then(username => {
-      console.log(username);
-      findBy(username);
-    });
-
+    .then(() => getUserById(id))
 }
 
 function deleteUser(id) {
