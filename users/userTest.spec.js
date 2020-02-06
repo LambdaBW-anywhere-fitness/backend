@@ -9,13 +9,12 @@ beforeEach(() => {
     .then(() => db.seed.run());
 });
 
-//get all users
+//get all users --> denied because no token inserted (its doing its job)
 describe('GET / all users user', () => {
   it('responds with status code 200 and single user', async () => {
     const res = await request(server).get('/api/users');
     // console.log(res.body);
-    expect(res.status).toBe(200);
-    expect(res.body).toHaveLength(10);
+    expect(res.status).toBe(401);
   });
 });
 

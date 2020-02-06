@@ -7,7 +7,7 @@ const router = express.Router();
 
 
 //removed 'restricted' for get all users to work
-router.get('/', (req, res) => {
+router.get('/', restricted, (req, res) => {
   //add logic here
   Users.getUsers()
     .then(users => {

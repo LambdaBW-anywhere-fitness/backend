@@ -1,6 +1,7 @@
 const server = require('../api/server');
 const request = require('supertest');
 const db = require('../database/dbConfig');
+const restricted = require('../middleware/middle-ware');
 
 beforeEach(() => {
   return db.migrate
@@ -66,5 +67,15 @@ describe('Put a class', () => {
       .put('/api/classes/1')
       .send({ class_name: 'Hockey' });
     expect(edit.status).toBe(201);
+  });
+});
+
+describe('DELETE/ single class', () => {
+  it('responds with status code 200 and single class was deleted', async () => {
+    const res = await request(server).delete('/api/classes/1');
+    // console.log(res.body);
+    // .set('Content-Type', 'application/json')
+    expect(res.status).toBe(201);
+    expect(res.type).toBe('application/json');
   });
 });
