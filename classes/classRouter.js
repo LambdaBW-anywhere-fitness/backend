@@ -70,9 +70,10 @@ router.put('/:id', (req, res) => {
 // DELET a Classs
 
 router.delete('/:id', (req, res) => {
-  Classes.deleteClass(req.params.id)
+  const deletedID = req.params.id;
+  Classes.deleteClass(deletedID)
     .then(result => {
-      res.status(201).json(`class id ${req.params.id} was deleted`);
+      res.status(201).json(`class id ${deletedID} was deleted`);
     })
     .catch(err => {
       console.log(err);
