@@ -34,7 +34,7 @@ function addUser(user) {
   return db('users')
     .insert(user, 'id')
     .then(ids => {
-      console.log(ids);
+      // console.log(ids);
       return getUserById(ids[0]);
     });
 }
@@ -46,7 +46,7 @@ function updateUser(id, changes) {
     .where({ id })
     .update(changes)
     .then(username => {
-      console.log(username);
+      // console.log(username);
       findBy(username);
     });
 }
