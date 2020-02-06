@@ -54,9 +54,11 @@ router.put('/:id', (req, res) => {
 //DELETE User
 
 router.delete('/:id', (req, res) => {
-  Users.deleteUser(req.params.id)
+  const deletedId = req.params.id;
+
+  Users.deleteUser(deletedId)
     .then(user => {
-      res.status(200).json(4);
+      res.status(200).json(`id ${deletedId} was deleted`);
     })
     .catch(err => {
       console.log(err);
