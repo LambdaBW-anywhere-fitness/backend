@@ -5,11 +5,13 @@ const router = express.Router();
 
 //getUsers --> returns a list of all 'users' --> from endpoint --> /api/users
 
-router.get('/',  (req, res) => {
+
+//removed 'restricted' for get all users to work
+router.get('/', (req, res) => {
   //add logic here
   Users.getUsers()
     .then(users => {
-      console.log('inside all getUsers', users);
+      // console.log('inside all getUsers', users);
       res.status(200).json(users);
     })
     .catch(error => {
@@ -25,7 +27,7 @@ router.get('/:id', (req, res) => {
 
   Users.getUserById(userId)
     .then(user => {
-      console.log('inside getUserById', user);
+      // console.log('inside getUserById', user);
       if (user) {
         res.status(200).json(user);
       } else {
@@ -54,9 +56,11 @@ router.put('/:id', (req, res) => {
 //DELETE User
 
 router.delete('/:id', (req, res) => {
-  Users.deleteUser(req.params.id)
+  const deletedId = req.params.id;
+
+  Users.deleteUser(deletedId)
     .then(user => {
-      res.status(200).json(4);
+      res.status(200).json(`id ${deletedId} was deleted`);
     })
     .catch(err => {
       console.log(err);

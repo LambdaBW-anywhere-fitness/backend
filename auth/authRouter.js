@@ -17,7 +17,7 @@ router.post('/register', middleware.verifyRegister, (req, res) => {
 
   Users.addUser(newUser)
     .then(user => {
-      console.log('inside authRouter addUser', user);
+      // console.log('inside authRouter addUser', user);
 
       const token = signToken(user); //invoke the function and pass in the 'user'
       res.status(200).json({ user: { id: user.id, username: user.username, email: user.email, role: user.role, token: token, message: `Welcome, ${user.username}. Thanks for registering as an ${user.role} today! ` } });
@@ -32,10 +32,10 @@ router.post('/register', middleware.verifyRegister, (req, res) => {
 router.post('/login', (req, res) => {
   //add here
   const { username, password, role } = req.body;
-  console.log('on line 33', username, password);
+
   Users.findBy(username)
     .then(user => {
-      console.log('inside user findBy', user);
+      // console.log('inside user findBy', user);
       if (user && bcrypt.compareSync(password, user.password)) {
         //create the token
         const token = signToken(user); //invoke the function and pass in the 'user'

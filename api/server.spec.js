@@ -1,20 +1,20 @@
 const request = require('supertest');
+const db = require('../database/dbConfig');
+const server = require('../api/server');
 
-const server = require('./server');
-
-///GET test --> test server is working
-describe('server', function() {
-  it('describes the test working', function() {
-    expect(true).toBe(true);
-  });
+beforeEach(() => {
+  return db.migrate
+    .rollback()
+    .then(() => db.migrate.latest())
+    .then(() => db.seed.run());
 });
 
-//GET test --> test to s
-describe('get initial request is working', () => {
-  it('responds with string test that api is working', async () => {
-   const res = await request(server)
-   .get('/')
-  
-   expect(res.text).toBe('Anywhere fitness app api and server working')
+// //GET test --> test server is working
+describe('server', function() {
+  it('describes the test working', async function() {
+    const res = await request(server).get('/');
+    expect(res.type).toBe('application/json');
+    expect(res.status).toBe(200);
+
   });
 });

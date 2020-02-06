@@ -7,8 +7,7 @@ module.exports = {
   findBy,
   addUser,
   updateUser,
-  deleteUser,
- 
+  deleteUser
 };
 
 //getUsers --> get all 'users'
@@ -35,13 +34,12 @@ function addUser(user) {
   return db('users')
     .insert(user, 'id')
     .then(ids => {
-      console.log(ids);
+      // console.log(ids);
       return getUserById(ids[0]);
     });
 }
 
 // updates a user
-
 
 function updateUser(id, changes) {
   return db('users')
