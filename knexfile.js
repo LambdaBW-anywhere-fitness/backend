@@ -14,8 +14,14 @@ module.exports = {
   },
 
   testing: {
-    client: 'pg',
-    connection: process.env.TESTING_URL,
+    client: 'sqlite3',
+    connection: ':memory:',
+    pool: {
+      afterCreate: (conn, done) => {
+        conn.run('PRAGMA foreign_keys = ON', done);
+      }
+    },
+    useNullAsDefault: true,
     migrations: {
       directory: './database/migrations'
     },

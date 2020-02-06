@@ -1,28 +1,29 @@
 const server = require('../api/server');
 const request = require('supertest');
-// const db = require('../database/dbConfig')
+const db = require('../database/dbConfig');
 
-// beforeEach(() => {
-//     return db.migrate.rollback()
-//     .then(() => db.migrate.latest())
-//     .then(() => db.seed.run())
-// })
+beforeEach(() => {
+  return db.migrate
+    .rollback()
+    .then(() => db.migrate.latest())
+    .then(() => db.seed.run());
+});
 
-describe.skip('Get all classes', () => {
+describe('Get all classes', () => {
   it('GET /api/classes', async () => {
     const res = await request(server).get('/api/classes');
     expect(res.status).toBe(200);
   });
 });
 
-describe.skip('Get all classes error(500)', () => {
+describe('Get all classes error(500)', () => {
   it('GET /api/classes', async () => {
     const res = await request(server).get('/api/classes');
     expect(res.type).toMatch(/json/i);
   });
 });
 
-describe.skip('Post a class', () => {
+describe('Post a class', () => {
   it('POST /api/classes', async () => {
     const res = await request(server)
       .post('/api/classes')
@@ -31,7 +32,7 @@ describe.skip('Post a class', () => {
   });
 });
 
-describe.skip('register a user', () => {
+describe('register a user', () => {
   it('POST /api/auth/register', async () => {
     const res = await request(server)
       .post('/api/auth/register')
@@ -40,7 +41,7 @@ describe.skip('register a user', () => {
   });
 });
 
-describe.skip('login a user', () => {
+describe('login a user', () => {
   it('POST /api/auth/login', async () => {
     const signup = await request(server)
       .post('/api/auth/register')
@@ -56,7 +57,7 @@ describe.skip('login a user', () => {
   });
 });
 
-describe.skip('Put a class', () => {
+describe('Put a class', () => {
   it('Put /api/classes/1', async () => {
     const res = await request(server)
       .post('/api/classes')

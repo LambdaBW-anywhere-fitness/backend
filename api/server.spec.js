@@ -1,16 +1,19 @@
-// const request = require('supertest');
+const request = require('supertest');
+const db = require('../database/dbConfig');
+const server = require('../api/server');
 
-// const server = require('./server');
+beforeEach(() => {
+  return db.migrate
+    .rollback()
+    .then(() => db.migrate.latest())
+    .then(() => db.seed.run());
+});
 
 // //GET test --> test server is working
-// describe('server', function() {
-//   it('describes the test working', function() {
-//     request(server)
-//       .get('/')
-//       .expect('Content-Type', /json/)
-//       .then(res => {
-//         console.log('on line 12', res);
-//         expect(res.status).toBe(201);
-//       });
-//   });
-// });
+describe('server', function() {
+  it('describes the test working', async function() {
+    const res = await request(server).get('/');
+    expect(res.type).toBe('application/json');
+    expect(res.status).toBe(200);
+  });
+});

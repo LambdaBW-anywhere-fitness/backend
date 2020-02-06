@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
   //add logic here
   Users.getUsers()
     .then(users => {
-      console.log('inside all getUsers', users);
+      // console.log('inside all getUsers', users);
       res.status(200).json(users);
     })
     .catch(error => {
