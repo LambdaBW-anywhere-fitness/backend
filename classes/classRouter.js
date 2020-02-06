@@ -59,6 +59,7 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
   Classes.updateClass(req.params.id, req.body)
     .then(item => {
+      console.log(req.body)
       res.status(201).json(item);
     })
     .catch(err => {

@@ -15,5 +15,6 @@ describe('server', function() {
     const res = await request(server).get('/');
     expect(res.type).toBe('application/json');
     expect(res.status).toBe(200);
+
   });
 });

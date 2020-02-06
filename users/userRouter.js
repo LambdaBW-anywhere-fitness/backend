@@ -4,6 +4,8 @@ const restricted = require('../auth/restricted-middleware');
 const router = express.Router();
 
 //getUsers --> returns a list of all 'users' --> from endpoint --> /api/users
+
+
 //removed 'restricted' for get all users to work
 router.get('/', (req, res) => {
   //add logic here
@@ -44,7 +46,7 @@ router.put('/:id', (req, res) => {
   Users.updateUser(req.params.id, req.body)
     .then(user => {
       console.log(req.body);
-      res.status(201).json(req.body);
+      res.status(201).json(user);
     })
     .catch(err => {
       res.status(500).json({ error: ' something went wrong in the server' });
