@@ -3,18 +3,16 @@ const db = require('../database/dbConfig');
 const server = require('../api/server');
 
 beforeEach(() => {
-  return db.migrate
-    .rollback()
+  return db.migrate.rollback()
     .then(() => db.migrate.latest())
     .then(() => db.seed.run());
 });
 
-describe.skip('GET / all users', () => {
-  it('responds with status code 200 and return list of users', () => {
-    return request(server)
+describe('GET / all users', () => {
+  it('responds with status code 200 and return list of users', async () => {
+    const res = await request(server)
       .get('/api/users')
-      .expect('Content-Type', /json/)
-      .expect(401); //gives 401 not 'auth'
+      expect(res.status).toBe(200) //gives 401 not 'auth'
   });
 });
 
@@ -23,35 +21,33 @@ describe('GET / single user', () => {
   it('responds with status code 200 and single user', async () => {
     const res = await request(server)
       .get('/api/users/1')
-      .expect(res.status).toBe(500)
+      expect(res.status).toBe(200)
   });
 });
 
 //update a user test
-describe.skip('PUT /users/1', function() {
-  it('updates a single user and get a 201 code', function() {
-    request(server)
-      .put('/api/users/1')
+describe('PUT /users/1', () => {
+  it('updates a single user and get a 201 code', async () => {
+    const res = request(server)
+      .post('/api/auth/register')
       .send({
-        username: 'superman',
-        email: 'superman@test.com',
-        password: 'superman',
-        role: 'instructor'
+        username: 'Hi', password:'hello', email:'hello@gmail.com', role: 'instructor'
       })
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .then(res => {
-        expect(res.status).toBe(201);
-      });
+      const edit = await request(server)
+      .put('/api/users/1')
+      .send({username: 'GoodBye'})
+      expect(edit.status).toBe(201)
   });
 });
 
 //delete a user test
-describe.skip('DELETE/ single user', () => {
-  it('responds with status code 200 and single user was deleted', () => {
-    return request(server)
+describe('DELETE/ single user', () => {
+  it('responds with status code 200 and single user was deleted', async () => {
+    const res =  request(server)
+      .post('/api/auth/register')
+      .send({username: "Hello", password: "hello", email: "Hello@hello.com", role:"instructor"})
+      const edit = await request(server)
       .delete('/api/users/1')
-      .expect('Content-Type', /json/)
-      .expect(200);
+      expect(edit.body).toBe(4)
   });
 });
