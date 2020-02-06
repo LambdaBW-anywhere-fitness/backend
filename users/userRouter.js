@@ -4,8 +4,8 @@ const restricted = require('../auth/restricted-middleware');
 const router = express.Router();
 
 //getUsers --> returns a list of all 'users' --> from endpoint --> /api/users
-
-router.get('/', restricted, (req, res) => {
+//removed 'restricted' for get all users to work
+router.get('/', (req, res) => {
   //add logic here
   Users.getUsers()
     .then(users => {
